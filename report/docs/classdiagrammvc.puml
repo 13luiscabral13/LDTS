@@ -1,0 +1,335 @@
+@startuml
+
+Place <|--o House
+Place <|-- Map
+House <|-- Barn
+House <|-- Blacksmith
+House <|-- Butcher
+House <|-- Builder
+House <|-- Seller
+Element <|-- Coin
+Element <|-- Mineral
+Element <|-- Mines
+Element <|-- Monster
+Monster <|-- Aimless
+Monster <|-- Stalker
+Element <|-- NPC
+Element <|-- Player
+Game --> Map: manipulates
+Player --> Inventory: manipulates
+Inventory --> Product: manipulates
+Element --> Position: manipulates
+Map --> Element: displays
+
+class Aimless{
+    +Aimless()
+    +moveMonster()
+    +moveAimless()
+    +draw()
+}
+
+class Barn{
+    + Barn()
+    + drawThings()
+}
+
+class Blacksmith{
+    + Blacksmith()
+    + drawThings()
+}
+
+class Builder{
+    + Builder()
+    + drawThings()
+    + buy()
+}
+
+class Butcher{
+    + Butcher()
+    + drawThings()
+}
+
+class Coin{
+    + Coin()
+    + draw()
+}
+
+abstract class Element{
+    - position: Position
+    + Element()
+    + getPosition()
+    + setPosition()
+    + draw()
+}
+
+class Game{
+    - screen: Screen
+    - map: Map
+    - player: Player
+    - window: JFrame
+    - label: JLabel
+    - day: int
+    - hour: int
+    - minute: int
+    - timer1: Timer
+    + Game()
+    + draw()
+    + Time()
+    + timeBegin()
+    + run()
+}
+
+abstract House{
+    - name: String
+    - screen: Screen
+    - productScreen : Screen
+    - npc: NPC
+    + House()
+    + getNpc()
+    + getScreen()
+    + setName()
+    + getName()
+    + getProductScreen()
+    + draw()
+    + createHouseScreen()
+    + createScreen()
+    + drawProducts()
+    + buyProduct()
+    + checkInventory()
+    + checkBalance()
+    + run()
+    + drawThings()
+}
+
+class Inventory{
+    - inventoryScreen: Screen
+    - products: List
+    + Inventory()
+    + draw()
+    + getTools()
+    + getProductQuantity()
+    + getProductByQuantity()
+    + getProductsByType()
+    + addProduct()
+    + removeProduct()
+}
+
+class Map{
+    - mine: Mines
+    - butcher: Butcher
+    - barn: Barn
+    - blacksmith: Blacksmith
+    - builder: Builder
+    - seller: Seller
+    - coins: List
+    - trees: List
+    - aimlessList: List
+    - stalkers: List
+    - housePosition: List
+    + Map()
+    + openMine()
+    + openButcher()
+    + openBarn()
+    + openBlacksmith()
+    + openBuilder()
+    + openSeller()
+    + draw()
+    + isPositionAvailable()
+    + createCoins()
+    + retrieveCoins()
+    + createAimless()
+    + createStalkers()
+    + createTrees()
+    + checkTree()
+    + plantTree()
+    + retrieveTree()
+    + moveMonstersAround()
+    + moveStalkers()
+    + checkCollision()
+    + getTrees()
+    + growTree()
+}
+
+class Mineral{
+    - name: String
+    + Mineral()
+    + getName()
+    + setName()
+    + draw()
+}
+
+class Mines{
+    - minerals: List
+    - aimlessList: List
+    - mineScreen: Screen
+    + Mines()
+    + createMinerals()
+    + createMineScreen()
+    + isPositionAvailable()
+    + moveMonstersAround()
+    + createAimless()
+    + draw()
+    + retriveMinerals()
+    + run()
+    + killMonster()
+    + checkCollision()
+}
+
+class Monster{
+    - damage
+    - symbol
+    + Monster()
+    + draw()
+    + setsymbol()
+    + getDamage()
+    + setDamage()
+    + moveMonster()
+}
+
+class Music{
+    + playMusic()
+    + wallHitSoundEffect()
+    + dyingSoundEffect()
+    + coinPicker()
+    + eatSound()
+    + treeBeatSound()
+    + treePlantSound()
+    + treeGrowSound()
+    + npcHelloBarn()
+    + npcHelloBlacksmith()
+    + npcHelloButcher()
+    + npcHelloSeller()
+    + npcHelloBuilder()
+    + buyingSoundEffect()
+    + lostLifeSoundEffect()
+    + gameOverSoundEffect()
+    + mineralGetter()
+    + monsterFightSoundEffect()
+    + enterNPCSoundEffect()
+    + enterMineSoundEffect()
+}
+
+class NPC{
+    - typeNpc: String
+    - inventoryNPC: List
+    + NPC()
+    + getTypeNPC()
+    + setTypeNPC()
+    + draw()
+    + talk()
+}
+
+class Place{
+    - width: Int
+    - height: Int
+    - player: Player
+    + Place()
+    + getWidth()
+    + setWidth()
+    + getHeight()
+    + setHeight()
+    + getPlayer()
+    + setPlayer()
+    + canPlayerMove()
+    + movePlayer()
+    + getInventory()
+    + drawInventory()
+    + drawBalance()
+    + drawEat()
+    + processKey()
+    + killMonster()
+    + collision()
+}
+
+class Player{
+    - inventory: Inventory
+    - balanceScreen: Screen
+    - eatScreen: Screen
+    - balance: Int
+    - energy: Int
+    - life: String
+    - lastPosition: Position
+    - energyCounter: Int
+    - viableNumber : Int
+    + Player()
+    + setViableNumber()
+    + getViableNumber()
+    + getBalance()
+    + setEnergy()
+    + getEnergy()
+    + setEnergyCounter()
+    + getEnergyCounter()
+    + increaseEnergy()
+    + decreaseEnergy()
+    + getLife()
+    + setLife()
+    + getLastPosition()
+    + setLastPosition()
+    + draw()
+    + moveUp()
+    + moveDown()
+    + moveRight()
+    + moveLeft()
+    + getInventory()
+    + showBalance()
+    + increaseBalance()
+    + decreaseBalance()
+    + checkKey()
+    + eat()
+}
+
+class Position{
+    - x: Int
+    - y: Int
+    + Position()
+    + getX()
+    + setX()
+    + getY()
+    + setY()
+    + equals()
+}
+
+class Product{
+    - type: String
+    - name: String
+    - quantity: int
+    - price: Int
+    - value: Int
+    + Product()
+    + getType()
+    + setType()
+    + getQuantity()
+    + setQuantity()
+    + getName()
+    + getPrice()
+    + getValue()
+    + equals()
+}
+
+class Seller{
+    + Seller()
+    + run()
+    + drawAllProducts()
+    + sell()
+}
+
+class Stalker{
+    + Stalker()
+    + moveMonster()
+    + draw()
+}
+class Tree{
+    - damage: Int
+    - symbol: Char
+    - counter: Int
+    + Tree()
+    + getSymbol()
+    + setSymbol()
+    + draw()
+    + getDamage()
+    + decreaseDamage()
+    + getCounter()
+    + setCounter()
+}
+
+@enduml

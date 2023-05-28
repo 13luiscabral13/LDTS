@@ -1,0 +1,93 @@
+@startuml
+
+House <|-- Barn
+House <|-- Butcher
+House <|-- Blacksmith
+House <|-- Builder
+House <|-- Seller
+Place <|-- House
+House <.. NPC
+
+class Barn{
+    + Barn()
+    + drawThings()
+}
+
+class Blacksmith{
+    + Blacksmith()
+    + drawThings()
+}
+
+class Builder{
+    + Builder()
+    + drawThings()
+    + buy()
+}
+
+class Butcher{
+    + Butcher()
+    + drawThings()
+}
+
+abstract House{
+    - name: String
+    - screen: Screen
+    - productScreen : Screen
+    - npc: NPC
+    + House()
+    + getNpc()
+    + getScreen()
+    + setName()
+    + getName()
+    + getProductScreen()
+    + draw()
+    + createHouseScreen()
+    + createScreen()
+    + drawProducts()
+    + buyProduct()
+    + checkInventory()
+    + checkBalance()
+    + run()
+    + drawThings()
+}
+
+class NPC{
+    - typeNpc: String
+    - inventoryNPC: List
+    + NPC()
+    + getTypeNPC()
+    + setTypeNPC()
+    + draw()
+    + talk()
+}
+
+class Place{
+    - width: Int
+    - height: Int
+    - player: Player
+    + Place()
+    + getWidth()
+    + setWidth()
+    + getHeight()
+    + setHeight()
+    + getPlayer()
+    + setPlayer()
+    + canPlayerMove()
+    + movePlayer()
+    + getInventory()
+    + drawInventory()
+    + drawBalance()
+    + drawEat()
+    + processKey()
+    + killMonster()
+    + collision()
+}
+
+class Seller{
+    + Seller()
+    + run()
+    + drawAllProducts()
+    + sell()
+}
+
+@enduml

@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'info.solidsoft.pitest' version '1.6.0'
+}
+
+mainClassName = 'com.aor.beastie.Application'
+
+group 'com.aor.beastie'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'junit:junit:4.13.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testImplementation 'org.mockito:mockito-core:3.7.7'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation 'org.mockito:mockito-core:3.7.7'
+    implementation group: 'com.googlecode.lanterna',
+            name: 'lanterna', version: '3.1.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+pitest {
+    junit5PluginVersion = '0.15'
+    pitestVersion = '1.6.7'
+    verbose = true
+    excludedTestClasses = ['com.aor.beastie.TerminalTests']
+}

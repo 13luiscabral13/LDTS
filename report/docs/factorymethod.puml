@@ -1,0 +1,30 @@
+@startuml
+
+Monster <|-- Aimless
+Monster <|-- Stalker
+
+class Aimless{
+    +Aimless()
+    +moveMonster()
+    +moveAimless()
+    +draw()
+}
+
+abstract Monster{
+    - damage
+    - symbol
+    + Monster()
+    + draw()
+    + setsymbol()
+    + getDamage()
+    + setDamage()
+    + moveMonster()
+}
+
+class Stalker{
+    + Stalker()
+    + moveMonster()
+    + draw()
+}
+
+@enduml
